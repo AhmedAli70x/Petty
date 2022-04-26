@@ -45,3 +45,33 @@ app.listen(HTTP_PORT, () => {
 });
 
 
+app.get("/api/pets", (req, res) => {
+    var sql = "SELECT * FROM pets"
+    var params = []
+    db.all(sql, params, (err, records) => {
+        if (err) {
+          res.status(400).json({"error":err.message});
+          return;
+        }
+        res.json({
+            "success": true,
+            "data":records
+        })
+      });
+});
+
+app.get("/api/pet/:id", (req, res, next) =>{
+    var sql = 'SELECT * FROM pets where id =?'
+    var params = [ req.params.id]
+
+  db.get(sql, params, (err, row) => {
+      if (err) {
+          res.status(400).json({"error":err.message});
+          return;
+      }
+      res.json({
+        "success": true,
+        "data":row
+      })
+  })
+});
