@@ -85,6 +85,7 @@
   section{
     position: relative;
     display: flex;
+    height: 75vh;
     background-color: var(--sec-color);
  
     padding-left: 10%;
@@ -140,12 +141,12 @@ a.menu:hover {
 
 
 footer{
-  bottom: 0;
+  /* bottom: 0; */
   background-color: var(--primary-color);
   color: var(--white-color);
   height: 15vh;
   left: 0;
-  position: absolute; 
+  /* position: absolute;  */
   font-size: small;
   width:100%;
   padding-left: 8%;
@@ -236,16 +237,35 @@ footer > #contact > div {
 
   @media (max-width:600px) {
 
+    section{
+      font-size: 0.7rem;
+    }
+  
+    .col1{
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: column;
+      text-align: center;
+      padding-bottom: 8%;
+  
+    }
+    .col2{
+      flex: 1;
+      display: none;
+
+  
+    }
   
   
-      
   footer{
-    bottom: 0;
+    /* bottom: 0; */
     background-color: var(--primary-color);
     color: var(--white-color);
     height: auto;
     left: 0;
-    position: absolute; 
+    /* position: absolute;  */
     font-size: small;
     width:100%;
     padding-left: 8%;
