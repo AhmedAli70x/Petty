@@ -5,35 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petty</title>
-    <link rel="stylesheet" href="testStyle.css" >
+    <link rel="stylesheet" href="scripts/style.css" >
 </head>
 <body>
 
     <div class="container">
-        <div class="nav">
-            <input type="checkbox" id="nav-check">
-                <div class="nav-header">
-                    <div class="nav-title">
-                        Petty
-                    </div>
-                </div>
-                <div class="nav-btn">
-                <label for="nav-check">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
-            </div>
-            
-            <div class="nav-links">
-                <a href="/" target="_blank">Home</a>
-                <a href="/Reports" target="_blank">Reports</a>
-                <a href="/about" target="_blank">About</a>
-             
-             
-            </div>
-        </div>
-
+       
+        <%- include('include/nav', {active: "About"}); %>
         <section>
             <div class="col1">
                            <h1 class="">We are here to restore your pet</h1>
@@ -41,13 +19,13 @@
                            <a class="report-btn" href="/report"><strong>Report</strong> </a>
 
                            <div class="phone">
-                            <img style="vertical-align:middle; width: 35px; height: 35px;" src="../images/phone-icon2.png"  class="img-fluid" alt="working girl">
+                            <img style="vertical-align:middle; width: 35px; height: 35px;" src="images/phone-icon2.png"  class="img-fluid" alt="working girl">
                             <span><strong > +99 999 999 9999</strong></span>
                            </div>
                
             </div>
             <div class="col2">
-                    <img src="../images/petHome.png" alt="pet">
+                    <img src="images/petHome.png" alt="pet">
             </div>
        </section>
      
@@ -55,24 +33,8 @@
       
 
 
-        
-        <footer >
-
-            <div id="contact">
-                <div class="phone">
-                    <img  src="../images/phone-46-32.png"   alt="phone">
-                    <span><strong > +99 999 999 9999</strong></span>
-                </div>
-                <div>
-                    <img  src="../images/email-64.png " alt="mail"> <span> <strong>Petty@findmypetty.com</strong></span>
-                </div>
-                <div>
-                    <img src="../images/home-7-32.png" alt="Address"> <span> <strong>UK, Southmapton, SO991ZX</strong></span>
-                </div>
-            </div>
-            <div>
-                <p class="right">All rights reserved 2022</p>
-            </div>
-        </footer>
+       <%- include('include/footer', {active: "About"}); %>
+       
+     
 </body>
 </html>
