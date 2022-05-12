@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petty</title>
+    <link rel="stylesheet" href="scripts/style.css" >
+</head>
+
+<body>
+
+    <div class="container">
+       
+        <%- include('include/nav' ); %>
+
+    
+            <form action="/api/report/" method="post">
+                <div class="row">
+                  <div class="col-25">
+                    <label for="name">Name</label>
+                  </div>
+                  <div class="col-75">
+                    <input type="text" id="name" name="name" placeholder="Pet name..">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-25">
+                    <label for="animal">Animal</label>
+                  </div>
+                  <div class="col-75">
+                    <input type="text" id="animal" name="animal" placeholder="Pet type..">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-25">
+                    <label for="description">Description</label>
+                  </div>
+                  <div class="col-75">
+                    <textarea id="description" name="description" placeholder="Pet description.." style="height:100px"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                      <label for="location">Location</label>
+                    </div>
+                    <div class="col-75">
+                      <input type="text" id="location" name="location" placeholder="Pet location..">
+                    </div>
+                </div>
+                
+
+                <div class="row">
+                  <input type="submit" value="Report">
+                </div>
+              </form>
+            
+ 
+     
+        
+      
+
+
+       <%- include('include/footer'); %>
+       
+    </div>
+</body>
+</html>

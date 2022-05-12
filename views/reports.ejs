@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petty</title>
+    <link rel="stylesheet" href="scripts/style.css" >
+</head>
+
+<body>
+
+    <div class="container">
+       
+        <%- include('include/nav' ); %>
+        
+        <section >
+            
+            <div class="reports">
+
+                <div class="report">
+                    <div class="pet-image">
+                        <img src="images/dog.png" alt="pet-img">
+                    </div>
+                    <div class="reportDetails">
+                        
+                        <a href="/api/report/1">Charly</a>
+                        <a href="/api/report/1">Golend Dog</a>
+                         <a href="/api/report/1" class="petDescription" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec orci leo, tristique id nunc at, pellentesque vehicula eros. Aliquam mauris.</a>
+
+                    </div>
+                </div>
+
+                <div class="report">
+                    <div class="pet-image">
+                        <img src="images/dog.png" alt="pet-img">
+                    </div>
+                    <div class="reportDetails">
+                        
+                        <a href="/report/1">Charly</a>
+                        <a href="/report/1">Golend Dog</a>
+                         <a href="/report/1" class="petDescription" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec orci leo, tristique id nunc at, pellentesque vehicula eros. Aliquam mauris.</a>
+
+                    </div>
+                </div>
+
+                <div class="report">
+                    <div class="pet-image">
+                        <img src="images/dog.png" alt="pet-img">
+                    </div>
+                    <div class="reportDetails">
+                        
+                        <a href="/report/1">Charly</a>
+                        <a href="/report/1">Golend Dog</a>
+                         <a href="/report/1" class="petDescription" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec orci leo, tristique id nunc at, pellentesque vehicula eros. Aliquam mauris.</a>
+
+                    </div>
+                </div>
+
+            </div>
+            
+            <script src="scripts/ajax.js"></script>
+            
+        </section>
+
+
+       <%- include('include/footer'); %>
+       
+    </div>
+</body>
+</html>

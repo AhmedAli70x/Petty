@@ -19,31 +19,7 @@ let db = new sqlite3.Database('petty.db', err=>{
     }
     else{
         console.log("Connected to petty database");
-        db.run('DROP TABLE IF EXISTS pets');
-        db.run(`
-            CREATE TABLE IF NOT EXISTS pets (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name text, 
-            animal text , 
-            description text,
-            location text
-            );`,
-        (err) => {
-            if (err) {
-                // console.log(err);
-                // Table already created
-            }else{
-                // Table just created, creating some rows
-                var insert = 'INSERT INTO pets (name, animal, description, location) VALUES (?,?,?,?);'
-                db.run(insert, ["ِAcorn", "dog", "Baby bulldog, small", "central park"])
-                db.run(insert, ["Blink", "dog", "Sausage dog", "vex park"])
-                db.run(insert, ["Dibby", "dog", "German Shepherd dof", "padminton road"])
-                db.run(insert, ["Cutie", "cat", "While cat", "Harly road"])
-                db.run(insert, ["Piper", "cat", "Gray cat", "west bank lake "])
-               
         
-            }
-        });  
     }
 });
 
@@ -52,7 +28,7 @@ app.listen(HTTP_PORT, () => {
 });
 
 
-app.get("/api/pets", (req, res) => {
+app.get("/api/reports", (req, res) => {
     var sql = "SELECT * FROM pets"
     var params = []
     db.all(sql, params, (err, records) => {
@@ -67,7 +43,7 @@ app.get("/api/pets", (req, res) => {
       });
 });
 
-app.get("/api/pet/:id", (req, res) =>{
+app.get("/api/report/:id", (req, res) =>{
     var sql = 'SELECT * FROM pet WHERE id =?'
     var params = [ req.params.id]
 
@@ -85,7 +61,7 @@ app.get("/api/pet/:id", (req, res) =>{
   })
 });
 
-app.post("/api/pet/", (req,res) =>{
+app.post("/api/report/", (req,res) =>{
 
     var errors = []
 
@@ -112,7 +88,7 @@ app.post("/api/pet/", (req,res) =>{
     
 })
 
-app.patch("/api/pet/:id", (req, res) =>{
+app.put("/api/report/:id", (req, res) =>{
     var data = {
         name: req.body.name,
         animal: req.body.animal,
@@ -147,7 +123,7 @@ app.patch("/api/pet/:id", (req, res) =>{
 
 })
 
-app.delete("/api/pet/:id", (req, res) =>{
+app.delete("/api/report/:id", (req, res) =>{
     db.run(
         "DELETE FROM pets WHERE id = ?;", req.params.id,
         function(err, result){
@@ -161,8 +137,40 @@ app.delete("/api/pet/:id", (req, res) =>{
 
 })
 
-app.get("/home", (req, res) =>{
+app.get("/", (req, res) =>{
  
     res.render("index")
 
 });
+
+app.get("/report", (req, res) =>{
+ 
+    res.render("report")
+
+});
+
+app.get("/reports", (req, res) =>{
+ 
+        var reportsAPI = new XMLHttpRequest();
+        reportsAPI.open('GET', '')
+        reportsAPI.onload = function(){
+            var reportsData = JSON.parse(reportsAPI.responseText);
+            console.log(reportsData[0]);
+        };
+        reportsAPI.send();
+    
+});
+
+
+
+
+
+app.get("/reports/:id", (req, res) =>{
+ 
+    res.render("reports")
+
+});
+
+
+
+

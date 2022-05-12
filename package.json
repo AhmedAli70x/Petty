@@ -1,7 +1,6 @@
 {
   "name": "petty",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,5 +13,15 @@
     "express": "^4.18.0",
     "pug": "^3.0.2",
     "sqlite3": "^5.0.5"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AhmedAli70x/Petty.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AhmedAli70x/Petty/issues"
+  },
+  "homepage": "https://github.com/AhmedAli70x/Petty#readme",
+  "description": ""
 }

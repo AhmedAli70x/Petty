@@ -11,30 +11,36 @@
 
     <div class="container">
        
-        <%- include('include/nav', {active: "About"}); %>
+        <%- include('include/nav'); %>
+
         <section>
-            <div class="col1">
-                           <h1 class="">We are here to restore your pet</h1>
+   
+     
+            <div class="col-1">
+                <h1 class="">We are here to restore your pet</h1>
 
-                           <a class="report-btn" href="/report"><strong>Report</strong> </a>
+                <div>
 
-                           <div class="phone">
-                            <img style="vertical-align:middle; width: 35px; height: 35px;" src="images/phone-icon2.png"  class="img-fluid" alt="working girl">
-                            <span><strong > +99 999 999 9999</strong></span>
-                           </div>
+                <h3>Help others restore their pet</h3>  <a class="report-btn" href="/report"><strong>Report</strong> </a>
+                </div>
+                <div class="phone">
+                <img style="vertical-align:middle; width: 35px; height: 35px;" src="images/phone-icon2.png"  class="img-fluid" alt="working girl">
+                <span><strong > +99 999 999 9999</strong></span>
+                </div>
                
             </div>
-            <div class="col2">
+            <div class="col-2">
                     <img src="images/petHome.png" alt="pet">
             </div>
-       </section>
-     
+        
+           
+        </section>
         
       
 
 
-       <%- include('include/footer', {active: "About"}); %>
+       <%- include('include/footer'); %>
        
-     
+    </div>
 </body>
 </html>
