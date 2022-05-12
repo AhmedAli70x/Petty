@@ -1,4 +1,5 @@
-const express = require("express");
+
+ express = require("express");
 const app = express();      //Create express instance
 const sqlite3 = require('sqlite3').verbose();
 
@@ -62,7 +63,6 @@ app.get("/api/report/:id", (req, res) =>{
 });
 
 app.post("/api/report/", (req,res) =>{
-
     var errors = []
 
     var data = {
@@ -71,7 +71,6 @@ app.post("/api/report/", (req,res) =>{
         description: req.body.description,
         location: req.body.location
     }
-
     var sql = 'INSERT INTO pets (name, animal, description, location) VALUES (?,?,?,?);'
     var params =  [req.body.name, req.body.animal, req.body.description, req.body.location]
     db.run(sql, params, function(err, result) {
@@ -142,34 +141,22 @@ app.get("/", (req, res) =>{
     res.render("index")
 
 });
-
 app.get("/report", (req, res) =>{
  
     res.render("report")
 
 });
-
 app.get("/reports", (req, res) =>{
  
-        var reportsAPI = new XMLHttpRequest();
-        reportsAPI.open('GET', '')
-        reportsAPI.onload = function(){
-            var reportsData = JSON.parse(reportsAPI.responseText);
-            console.log(reportsData[0]);
-        };
-        reportsAPI.send();
-    
-});
-
-
-
-
-
-app.get("/reports/:id", (req, res) =>{
- 
     res.render("reports")
-
 });
+
+
+
+
+
+
+
 
 
 

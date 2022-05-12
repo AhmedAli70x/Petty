@@ -129,11 +129,16 @@
       justify-content: center;
   }
   
-  .reportDetails a{
+   a{
     text-decoration: none;
-      color: var(--sec-color);;
+    color: var(--white-color);
 
     }
+  .reportDetails a{
+      text-decoration: none;
+        color: var(--sec-color);;
+  
+      }
 
 .petDescription {
   

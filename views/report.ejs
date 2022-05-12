@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petty</title>
-    <link rel="stylesheet" href="scripts/style.css" >
+    <link rel="stylesheet" href="style/style.css" >
 </head>
 
 <body>
@@ -15,13 +15,13 @@
         <%- include('include/nav' ); %>
 
     
-            <form action="/api/report/" method="post">
+            <form action="/api/report/" method="post" class="reportForm">
                 <div class="row">
                   <div class="col-25">
                     <label for="name">Name</label>
                   </div>
                   <div class="col-75">
-                    <input type="text" id="name" name="name" placeholder="Pet name..">
+                    <input type="text" id="name" name="name" placeholder="Pet name.." id="nameValue">
                   </div>
                 </div>
                 <div class="row">
@@ -29,7 +29,7 @@
                     <label for="animal">Animal</label>
                   </div>
                   <div class="col-75">
-                    <input type="text" id="animal" name="animal" placeholder="Pet type..">
+                    <input type="text" id="animal" name="animal" placeholder="Pet type.." id="animalValue">
                   </div>
                 </div>
                 <div class="row">
@@ -37,7 +37,7 @@
                     <label for="description">Description</label>
                   </div>
                   <div class="col-75">
-                    <textarea id="description" name="description" placeholder="Pet description.." style="height:100px"></textarea>
+                    <textarea id="description" name="description" placeholder="Pet description.." style="height:100px" id="descriptionValue"></textarea>
                   </div>
                 </div>
                 <div class="row">
@@ -64,5 +64,6 @@
        <%- include('include/footer'); %>
        
     </div>
+
 </body>
 </html>

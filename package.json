@@ -14,7 +14,6 @@
     "pug": "^3.0.2",
     "sqlite3": "^5.0.5"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AhmedAli70x/Petty.git"
