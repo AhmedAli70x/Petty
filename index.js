@@ -20,7 +20,32 @@ let db = new sqlite3.Database('petty.db', err=>{
     }
     else{
         console.log("Connected to petty database");
+        db.run('DROP TABLE IF EXISTS pets');
+        db.run(`
+            CREATE TABLE IF NOT EXISTS pets (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name text, 
+            animal text , 
+            description text,
+            location text
+            );`,
+        (err) => {
+            if (err) {
+                // console.log(err);
+                // Table already created
+            }else{
+                // Table just created, creating some rows
+                var insert = 'INSERT INTO pets (name, animal, description, location) VALUES (?,?,?,?);'
+                db.run(insert, ["ِAcorn", "dog", "Baby bulldog, small", "central park"])
+                db.run(insert, ["Blink", "dog", "Sausage dog", "vex park"])
+                db.run(insert, ["Dibby", "dog", "German Shepherd dof", "padminton road"])
+                db.run(insert, ["Cutie", "cat", "While cat", "Harly road"])
+                db.run(insert, ["Piper", "cat", "Gray cat", "west bank lake "])
+               
         
+            }
+        });  
+
     }
 });
 
@@ -44,8 +69,10 @@ app.get("/api/reports", (req, res) => {
       });
 });
 
+
+
 app.get("/api/report/:id", (req, res) =>{
-    var sql = 'SELECT * FROM pet WHERE id =?'
+    var sql = 'SELECT * FROM pets WHERE id =?'
     var params = [ req.params.id]
 
     
@@ -63,8 +90,6 @@ app.get("/api/report/:id", (req, res) =>{
 });
 
 app.post("/api/report/", (req,res) =>{
-    var errors = []
-
     var data = {
         name: req.body.name,
         animal: req.body.animal,
@@ -141,6 +166,12 @@ app.get("/", (req, res) =>{
     res.render("index")
 
 });
+app.get("/report/:id", (req, res) =>{
+ 
+    res.render("reportDetails")
+});
+
+
 app.get("/report", (req, res) =>{
  
     res.render("report")
@@ -150,6 +181,7 @@ app.get("/reports", (req, res) =>{
  
     res.render("reports")
 });
+
 
 
 

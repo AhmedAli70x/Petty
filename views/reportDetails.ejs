@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petty</title>
-    <link rel="stylesheet" href="style/style.css" >
+    <link rel="stylesheet" href="/style/style.css" >
 </head>
 
 <body>
@@ -13,7 +13,8 @@
     <div class="container">
        
         <%- include('include/nav' ); %>
-      <form   class="reportForm">
+  
+      <form   class="updateForm">
           <div class="row">
             <div class="col-25">
               <label for="name">Name</label>
@@ -47,20 +48,25 @@
               </div>
           </div>
 
-          <div class="row">
-            <!-- <button type="submit">Add Report</button> -->
-            <input type="submit" class="submitbtn" value="Submit">
+          <div class="row"> 
+ 
+
+            <input type="submit" class="submitbtn" value="Update">
+            <input type="button" class="deleteBtn" id ="delete" value="Delete">
+          </div>
+          <div class="row"> 
+           
           </div>
           <div id="success"></div>
         </form>
 
-       
+      
             
        <%- include('include/footer'); %>
        
     </div>
 
-    <script src="scripts/newReport.js"></script>
+    <script src="/scripts/reportDetails.js"></script>
 
 </body>
 </html>
