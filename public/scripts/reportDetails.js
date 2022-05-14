@@ -1,12 +1,87 @@
 
 
-
-
-
 curURL = window.location.href
+console.log(curURL)
 var id = curURL.substring(curURL.lastIndexOf('/') + 1);
-
 const updateUrl = `/api/report/${id}`;
+const updateForm = document.querySelector(".updateForm");
+const petName = document.getElementById("name");
+const animal = document.getElementById("animal");
+const description = document.getElementById("description");
+const petLocation = document.getElementById("location");
+
+
+function setError (element, message){
+  const col75 = element.parentElement;
+  const errorDisplay = col75.querySelector('.error')
+  errorDisplay.innerText = message;
+  col75.classList.add('error')
+  col75.classList.remove('success')
+}
+
+function setSuccess(element) {
+  const col75 = element.parentElement;
+  
+  const errorDisplay = col75.querySelector('.error')
+  errorDisplay.innerText = '';
+  col75.classList.add('success')
+  col75.classList.remove('error')
+}
+
+function validataInputs () {
+
+  const nameValue = petName.value.trim();
+  const animalValue = animal.value.trim();
+  const descriptionValue = description.value.trim();
+  const locationValue = petLocation.value.trim();
+
+  let nameCheck = false;
+  let animalCheck = false;
+  let descriptionCheck = false;
+  let locationCheck = false;
+
+  if(nameValue === ''){
+      setError(petName, 'Name is required')
+      nameCheck =  false;
+  } else{
+      setSuccess(petName) 
+      nameCheck = true  
+  }
+  if(animalValue === ''){
+      setError(animal, 'Animal is required')
+      animalCheck = false;
+  } else{
+      setSuccess(animal) 
+      animalCheck = true     
+  }
+
+  if(descriptionValue.length < 8){
+      setError(description, 'Min characters is 8')
+      descriptionCheck =  false;
+  } else{
+      setSuccess(description)
+      descriptionCheck = true
+      
+  }
+  if(locationValue .length < 5){
+      setError(petLocation, 'Min characters is 5')
+      locationCheck =  false;
+  } else{
+      setSuccess(petLocation)
+      locationCheck = true
+  }
+
+  if (nameCheck === true && animalCheck === true && descriptionCheck === true && locationCheck === true){
+      console.log("true")
+      return true
+  }else{
+      console.log("false")
+
+      return false
+  }
+
+}
+
 
 fetch(updateUrl)
   .then(response => response.json())
@@ -21,37 +96,38 @@ fetch(updateUrl)
 
 
 
-const reportForm = document.querySelector(".updateForm");
 
-reportForm.addEventListener('submit', (e)=>{
-  console.log(updateUrl)
-  const nameValue = document.getElementById("name");
-  const animalValue = document.getElementById("animal");
-  const descriptionValue = document.getElementById("description");
-  const locationValue = document.getElementById("location");
+updateForm.addEventListener('submit', (e)=>{
+  
     e.preventDefault();
-    var data = {
-        name: nameValue.value,
-        animal: animalValue.value,
-        description: descriptionValue.value,
-        location: locationValue.value
-    }
-    let dataJson = JSON.stringify(data)
-    console.log('form submitted')
-    console.log(dataJson)
+    let checkForm  = validataInputs();
+    if(checkForm){
+      var data = {
+          name: petName.value,
+          animal: animal.value,
+          description: description.value,
+          location: petLocation.value
+      }
+      let dataJson = JSON.stringify(data)
+      console.log('form submitted')
+      console.log(dataJson)
 
-    var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        console.log(xhttp.response)
-        document.getElementById('success').textContent = "Report updated sucessfully. Redirecting to reports page"
+      var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          console.log(xhttp.response)
+          document.getElementById('success').textContent = "Report updated sucessfully. Redirecting to reports page"
 
-        setTimeout(() => {  window.location = "/reports" }, 3000);
-    }
-  };
-    xhttp.open("PUT", updateUrl, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(dataJson);
+          setTimeout(() => {  window.location = "/reports" }, 3000);
+      }else{
+        document.getElementById('success').innerHTML = xhttp.response.innerText
+
+      }
+    };
+      xhttp.open("PUT", updateUrl, true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(dataJson);
+  }
 })
 
 

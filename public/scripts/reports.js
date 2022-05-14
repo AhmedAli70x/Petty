@@ -17,17 +17,14 @@ fetch(reportsUrl)
         output += `
         <div class="report">
             <div class="reportDetails">
-                
+              
                 <a href="/report/${report.id}">${report.name}</a>
                 <a href="/report/${report.id}">${report.animal}</a>
                 <a href="/report/${report.id}" class="petDescription" >${report.description}</a>
             </div>
             <div class="edit">
-            <a href="/report/${report.id}" class="btn">Edit</a>
-       
-        </div>
-
-       
+                <a href="/report/${report.id}" class="btn">Edit</a>
+            </div>
         </div>
         `;
     });

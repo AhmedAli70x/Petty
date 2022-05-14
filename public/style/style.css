@@ -103,8 +103,8 @@
 
   .report{
        width: 150px;
-      height: 200px;
-      /* margin-bottom: 20px; */
+      height: 150px;
+
       cursor: pointer;
       background-color: var(--white-color);
       border-radius: 3px;
@@ -148,7 +148,7 @@
     margin-bottom: 4px;
     overflow: hidden;
     display: -webkit-box; 
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;   
 }
 
@@ -182,12 +182,10 @@
     margin-bottom: 20%;
   }
   .report-btn{
- 
     padding: 15px 25px;
-    color: var(--primary-color);
-    background-color: var(--white-color);
-    border: 3px solid var(--primary-color);
-    
+    color: var(--white-color);
+    border: 3px solid var(--third-color);
+    border-radius: 45px;
     width: 40%;
     align-self: center;
     
@@ -211,8 +209,22 @@ a.menu:hover {
   
 }
 
+.col-75 input:focus{
+  outline: 0;
+}
 
+.col-75.success input{
+  border-color: #09c372;
+}
+.col-75.error input{
+  border-color: #ff3860;
+}
 
+.col-75 .error{
+  float: left;
+  color: #ff3860;
+  font-size: 0.8rem;
+}
 
 footer{
   /* bottom: 0; */
@@ -279,7 +291,6 @@ form{
   input[type=text], select, textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
   }
@@ -326,18 +337,19 @@ form{
   .edit, .delete {
     display: flex;
     justify-content: center;
+    margin-top: 10%;
 
   }
   .btn {
     background-color: var(--third-color); /* Green */
     border: none;
     width: 70px;
-    padding: 5pxx;
+    padding: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     border-radius: 5px;
-    margin-top: 10%;
+    bottom: 10px;
 
   }
 
@@ -374,17 +386,15 @@ form{
   
     }
     .report-btn{
-      
-      text-decoration: none;
-      text-transform: uppercase;
-     
-      color: var(--primary-color);
-      background-color: var(--white-color);
-      border: 3px solid var(--primary-color);
+      padding: 15px 25px;
+      color: var(--white-color);
+      border: 3px solid var(--third-color);
       border-radius: 45px;
       width: 40%;
       align-self: center;
+      
     }
+  
   
   }
 
