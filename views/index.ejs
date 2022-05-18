@@ -17,16 +17,26 @@
    
      
             <div class="col-1">
-                <h1 class="">Lets restore your pet</h1>
+                <h1 class="">Let's restore your pet</h1>
 
                 <div>
-
                 <h3>Help others restore their pet</h3>  <a class="report-btn" href="/report"><strong>Report</strong> </a>
                 </div>
-                <div class="phone">
-                <img style="vertical-align:middle; width: 35px; height: 35px;" src="images/phone-icon2.png"  class="img-fluid" alt="working girl">
-                <span><strong > +99 999 999 9999</strong></span>
+
+
+                <div class="search">
+                    
+                    <form  class="search-form">
+
+                        <div class="search-input">
+                            <input type="text" id="search-name" placeholder="Search by pet name">
+                            <div class="error"></div>
+                        </div>
+                        <button type="submit" id="search-btn" class> <img src="/images/search_icon.png"  alt="Search"></button>
+                        
+                    </form>
                 </div>
+                
                
             </div>
             <div class="col-2">
@@ -35,12 +45,21 @@
         
            
         </section>
-        
+
+        <div class="search">
+
+            <div class="reports">
+                
+    
+            </div>
+        </div>
       
-
-
+        
        <%- include('include/footer'); %>
        
     </div>
+
+    <script   src="scripts/validation.js"></script>
+    <script   src="scripts/search.js"></script>
 </body>
 </html>

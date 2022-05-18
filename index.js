@@ -1,5 +1,5 @@
 
- express = require("express");
+express = require("express");
 const app = express();      //Create express instance
 const sqlite3 = require('sqlite3').verbose();
 
@@ -73,21 +73,35 @@ app.get("/api/reports", (req, res) => {
 
 app.get("/api/report/:id", (req, res) =>{
     var sql = 'SELECT * FROM pets WHERE id =?'
-    var params = [ req.params.id]
-
-    
+    var params = [ req.params.id]    
   db.all(sql, params, (err, row) => {
       if (err) {
           res.status(400).json({"error":err.message});
           return;
       }
- 
+
       res.json({
         "success": true,
         "data":row
       })
   })
 });
+
+app.get("/api/search/:name", (req, res) =>{
+    var sql = "SELECT * FROM pets WHERE name LIKE '%' || ? || '%' "
+    var params = [ req.params.name]    
+  db.all(sql, params, (err, row) => {
+      if (err) {
+          res.status(400).json({"error":err.message});
+          return;
+      }
+      res.json({
+        "success": true,
+        "data":row
+      })
+  })
+});
+
 
 app.post("/api/report/", (req,res) =>{
     var data = {

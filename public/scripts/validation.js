@@ -1,5 +1,5 @@
 
-  function setError (element, message){
+  function setError(element, message){
     const col75 = element.parentElement;
     const errorDisplay = col75.querySelector('.error')
     errorDisplay.innerText = message;
@@ -14,8 +14,23 @@
     col75.classList.add('success')
     col75.classList.remove('error')
 }
- function validataInputs () {
-    console.log('valid imported')
+
+function validatasearch() {
+
+    const searchValue = searchNanme.value.trim();
+    console.log(searchValue)
+    if(searchValue === ''){
+        setError(searchNanme, 'Field required!')
+        nameCheck =  false;
+    } else{
+        setSuccess(searchNanme) 
+        nameCheck = true  
+    }
+
+}
+
+ function validataInputs() {
+ 
     const nameValue = petName.value.trim();
     const animalValue = animal.value.trim();
     const descriptionValue = description.value.trim();
@@ -68,4 +83,3 @@
 
 }
 
-module.exports = { validataInputs, setSuccess, setError };

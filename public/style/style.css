@@ -8,6 +8,7 @@
     --nav-bg:         #0c8195;
     --sec-color: #212529;
     --third-color: #f09000;
+    --report-color: rgb(179, 174, 174);
   }
   
   body {
@@ -32,9 +33,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-  
-
     
   }
   
@@ -45,7 +43,7 @@
   
   .nav > .nav-header > .nav-title {
     display: inline-block;
-    font-size: 1em;
+    font-size: 2em;
 
     
   }
@@ -68,13 +66,12 @@
     padding: 13px 10px 13px 10px;
     text-decoration: none;
     color: var(--white-color);
-    margin-left: 50px;
+    margin-left: 20px;
     
   }
   
   .nav > .nav-links > a:hover {
     background-color: var(--sec-color);
-    /* background-color: #bda447; */
   }
   
   .nav > #nav-check {
@@ -85,16 +82,15 @@
     display: flex;
     height: 75vh;
     background-color: var(--sec-color);
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 9%;
+    padding-right: 9%;
     
   }
 
+  
   .reports{
-    
     width: 100%;
     height:100%;
-    padding-top: 10%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -102,21 +98,21 @@
   }
 
   .report{
-       width: 150px;
+      width: 150px;
       height: 150px;
-
+      margin: 3%;
       cursor: pointer;
-      background-color: var(--white-color);
+      background-color: var(--report-color);
       border-radius: 3px;
       padding: 10px;
+      
   }
-.pet-image{
 
-  width: 100%;
-    height: 100px;
-    margin-bottom: 12px;
+.search-button{
+  height: 40px;
+  width: 40px;
 }
-.pet-image img{
+.pet-image img , #search-btn img{
   height: 100%;
   width: 100%;
 
@@ -140,11 +136,59 @@
   
       }
 
-.petDescription {
-  
-  color: rgp(3,3,3);
+
+    .search{
+        display: flex;
+        justify-content: center;   
+        padding-left: 9%;
+        padding-right: 9%;   
+    }
     
-    max-width: 278px;    
+    .search-form{
+        display: flex;
+        height: 40px;
+        width: 250px;
+    }
+
+    .search-input input:focus{
+      outline: 0;
+    }
+    
+    .search-input.success input{
+      border-color: #09c372;
+    }
+    .search-input.error input{
+      border-color: #ff3860;
+    }
+    
+    .search-input .error{
+      margin: 0;
+      padding: 0;
+      float: left;
+      color: #ff3860;
+      font-size: 0.8rem;
+    }
+
+    .search-input input{
+  
+        border-right: none;
+    }
+
+    .search-form   button{
+      height: 40px;
+        width: 50px;
+
+        border: 1px solid  #d3d3d3;
+        border-radius: 0 2px 2px 0;
+        padding-top: 4px;
+        background-color: #f8f8f8;
+        cursor: pointer;
+    }
+   
+
+.pet-description , .pet-type, .pet-name {
+  color: rgp(3,3,3); 
+    max-width: 100px;    
     margin-bottom: 4px;
     overflow: hidden;
     display: -webkit-box; 
@@ -163,7 +207,7 @@
 
   }
   .col-2{
-  
+
     width: 50%;
     margin: 0;
     padding: 0;
@@ -221,6 +265,8 @@ a.menu:hover {
 }
 
 .col-75 .error{
+  margin: 0;
+  padding: 0;
   float: left;
   color: #ff3860;
   font-size: 0.8rem;
@@ -276,10 +322,9 @@ footer > #contact > div {
   
   
 
-form{
+.Form{
   display: flex;
   flex-direction: column;
-  height: 75vh;
   background-color: var(--sec-color);
   padding: 10%;
   text-align: center;
@@ -300,7 +345,7 @@ form{
     display: inline-block;
   }
   
-  .submitbtn , .deleteBtn{
+  .submitbtn, .deleteBtn{
     background-color: var(--primary-color);
     color: white;
     padding: 12px 60px;
@@ -353,6 +398,17 @@ form{
 
   }
 
+  .search-reports{
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--sec-color);
+    padding-left: 9%;
+    padding-right: 9%;
+
+  }
+
+  
+
   @media (max-width:900px) {
 
     section{
@@ -374,9 +430,8 @@ form{
       
       margin: auto;
       padding: 0;
-  
     }
-  
+
     .col-2 img{
       position: relative;
       display: flex;
@@ -395,10 +450,56 @@ form{
       
     }
   
+
+    
+    .nav > .nav-btn {
+      display: inline-block;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+    }
+    .nav > .nav-btn > label {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      padding: 13px;
+    }
+    .nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+      background-color: var(--sec-color);
+    }
+    .nav > .nav-btn > label > span {
+      display: block;
+      width: 25px;
+      height: 10px;
+      border-top: 2px solid var(--white-color);
+    }
+    .nav > .nav-links {
+      position: absolute;
+      display: block;
+      width: 100%;
+      background-color: var(--nav-bg);
+      height: 0px;
+      transition: all 0.3s ease-in;
+      overflow-y: hidden;
+      top: 50px;
+      left: 0px;
+    }
+    .nav > .nav-links > a {
+      display: block;
+      width: 100%;
+    }
+    .nav > #nav-check:not(:checked) ~ .nav-links {
+      height: 0px;
+    }
+    .nav > #nav-check:checked ~ .nav-links {
+      height: calc(100vh - 50px);
+      overflow-y: auto;
+    }
   
   }
 
   @media (max-width:600px) {
+    
 
     section{
       font-size: 0.85rem;
@@ -417,16 +518,19 @@ form{
     .col-2{
       flex: 1;
       display: none;
-
   
     }
 
     .col-25, .col-75 {
-
+      padding: 0;
       width: 100%;
       margin-top: 0;
       margin-right: 10%;
 
+    }
+  
+    .col-25 label{
+      float: left;
     }
     .row{
       text-align: center;
@@ -519,9 +623,19 @@ form{
      height: 150px;
      /* margin-bottom: 20px; */
      cursor: pointer;
-     background-color: var(--white-color);
+     background-color: var(--report-color);
      border-radius: 3px;
      padding: 10px;
  }
+
+ .pet-description , .pet-type, .pet-name {
+  color: rgp(3,3,3); 
+    max-width: 90px;    
+    margin-bottom: 4px;
+    overflow: hidden;
+    display: -webkit-box; 
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;   
+}
   }
 
