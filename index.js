@@ -6,6 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 app.set("view engine", "ejs");
 app.use(express.static("public"))
 var bodyParser = require("body-parser");
+const res = require("express/lib/response");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -17,34 +18,10 @@ var HTTP_PORT = 5000  // HTTP port
 let db = new sqlite3.Database('petty.db', err=>{
     if(err){
         console.log(err.message);
+        return;
     }
     else{
         console.log("Connected to petty database");
-        db.run('DROP TABLE IF EXISTS pets');
-        db.run(`
-            CREATE TABLE IF NOT EXISTS pets (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name text, 
-            animal text , 
-            description text,
-            location text
-            );`,
-        (err) => {
-            if (err) {
-                // console.log(err);
-                // Table already created
-            }else{
-                // Table just created, creating some rows
-                var insert = 'INSERT INTO pets (name, animal, description, location) VALUES (?,?,?,?);'
-                db.run(insert, ["ِAcorn", "dog", "Baby bulldog, small", "central park"])
-                db.run(insert, ["Blink", "dog", "Sausage dog", "vex park"])
-                db.run(insert, ["Dibby", "dog", "German Shepherd dof", "padminton road"])
-                db.run(insert, ["Cutie", "cat", "While cat", "Harly road"])
-                db.run(insert, ["Piper", "cat", "Gray cat", "west bank lake "])
-               
-        
-            }
-        });  
 
     }
 });
@@ -54,8 +31,22 @@ app.listen(HTTP_PORT, () => {
 });
 
 
+function chechReportExist(id){
+    db.get("SELECT id FROM newpets \
+    WHERE id = ?", id, function(err, result){
+        if(err){
+            console.log("error here")
+        }
+        else{
+            return result
+        }
+
+})
+}
+
 app.get("/api/reports", (req, res) => {
-    var sql = "SELECT * FROM pets"
+    var sql = "SELECT id, name, animal, description, road, area, city FROM newpets as p \
+    INNER JOIN location as l ON l.location_id = p.location_id;"
     var params = []
     db.all(sql, params, (err, records) => {
         if (err) {
@@ -72,25 +63,41 @@ app.get("/api/reports", (req, res) => {
 
 
 app.get("/api/report/:id", (req, res) =>{
-    var sql = 'SELECT * FROM pets WHERE id =?'
-    var params = [ req.params.id]    
-  db.all(sql, params, (err, row) => {
-      if (err) {
-          res.status(400).json({"error":err.message});
-          return;
-      }
+    //check if there report is exist
+    db.get("SELECT id FROM newpets \
+    WHERE id = ?", req.params.id, function(err, result){
+        if(err){
+            console.log("error here")
+        }
+        else if(result) {
+            var sql = "SELECT id, name, animal, description, road, area, city FROM newpets as p \
+            INNER JOIN location as l ON l.location_id = p.location_id \
+               WHERE id = ?;"   
+           db.all(sql, req.params.id, (err, row) => {
+             if (err) {
+                 res.status(400).json({"error":err.message});
+                 return;
+             }
+                   res.json({
+                       "success": true,
+                       "data":row
+                   })
+               })
+            }
+        else{
+            res.status(204).json({"error": "No Report Found"});
 
-      res.json({
-        "success": true,
-        "data":row
-      })
-  })
+        }
+
+        })
 });
 
 app.get("/api/search/:name", (req, res) =>{
-    var sql = "SELECT * FROM pets WHERE name LIKE '%' || ? || '%' "
+    var sql = "SELECT id, name, animal, description, road, area, city FROM newpets as p \
+    INNER JOIN location as l ON l.location_id = p.location_id \
+    WHERE name LIKE '%' || ? || '%' "
     var params = [ req.params.name]    
-  db.all(sql, params, (err, row) => {
+    db.all(sql, params, (err, row) => {
       if (err) {
           res.status(400).json({"error":err.message});
           return;
@@ -108,21 +115,50 @@ app.post("/api/report/", (req,res) =>{
         name: req.body.name,
         animal: req.body.animal,
         description: req.body.description,
-        location: req.body.location
+        road: req.body.road,
+        area: req.body.area,
+        city: req.body.city
     }
-    var sql = 'INSERT INTO pets (name, animal, description, location) VALUES (?,?,?,?);'
-    var params =  [req.body.name, req.body.animal, req.body.description, req.body.location]
-    db.run(sql, params, function(err, result) {
-        if(err, result){
+    //Insert record into location table first according to sqlite_sequence table 
+    var  insertLocation = "INSERT INTO location (road, area, city) VALUES (?, ?, ?);"
+    db.run(insertLocation,[data.road, data.area, data.city], function(err) {
+        
+        if(err){
             res.status(400).json({"error": err.message})
         }
-        res.json({
-            "success": true,
-            "data": data,
-            "id": this.lastID
-        })
-    })
 
+        else{
+            db.get("SELECT location_id FROM location \
+            ORDER BY location_id DESC \
+            LIMIT 1", [], function(err, result){
+                if(err){
+                     res.status(400).json({"error": err.message})
+                }
+                else{
+                    // console.log(result)
+                    let lastLocationId = result.location_id
+                    // console.log(lastLocationId)
+                    var insertReport = 'INSERT INTO newpets (name, animal, description, location_id) VALUES (?,?,?,?);'
+                    db.run(insertReport, [data.name, data.animal, data.description, lastLocationId], function(err,result){
+                        if(err){
+                            res.status(400).json({"error": err.message})
+                        }
+                        else{
+                            res.json({
+                                "success": true,
+                                "data": data,
+                                "id": this.lastID
+                            })
+                        }
+
+                    })
+
+                }
+
+            })
+
+        }
+      });
     
 })
 
@@ -131,49 +167,131 @@ app.put("/api/report/:id", (req, res) =>{
         name: req.body.name,
         animal: req.body.animal,
         description: req.body.description,
-        location: req.body.location
+        road: req.body.road,
+        area: req.body.area,
+        city: req.body.city
     }
-    console.log(data.description)
-    db.run(
-        `UPDATE pets SET
-        name = COALESCE(?, name),
-        animal = COALESCE(?, animal),
-        description = COALESCE(?, description),
-        location = COALESCE(?, location)
-        WHERE id = ?`,
-        [data.name, data.animal, data.description, data.location, req.params.id],
-        function(err, result){
-            if(err){
-                res.status(400).json({"error": res.message})
-                console.log(err)
-                return;
-            }
 
-            res.json({
-                message: "success",
-                data: data,
-                changes: this.changes
-            })
+    db.get("SELECT id FROM newpets WHERE id = ?;",[req.params.id], function(err, result){
+        if(err){
+            res.status(400).json({"error": res.message})
+            return ;
         }
-        
-    )
+        else{
+            if(result){
+                db.run(
+                    `UPDATE newpets SET
+                    name = COALESCE(?, name),
+                    animal = COALESCE(?, animal),
+                    description = COALESCE(?, description)
+                    WHERE id = ?`,
+                    [data.name, data.animal, data.description, req.params.id],
+                    function(err){
+                        if(err){
+                            res.status(400).json({"error": res.message})
+                            console.log(err)
+                            return;
+                        }
+                        else{
+                            console.log("First insert done")
+                            db.get("SELECT p.location_id FROM newpets as p \
+                            INNER JOIN location as l ON l.location_id = p.location_id \
+                            WHERE id = ?;",[req.params.id], function(err, result){
+                                if(err){
+                                    res.status(400).json({"error": res.message})
+                                    console.log(err)
+                                    return;
+                                }
+                                else{
+                                    console.log("Select Statement  done")
+                                    let locationId = result.location_id
+                                    db.run(`
+                                    UPDATE location SET
+                                    road = COALESCE(?, road),
+                                    area = COALESCE(?, area),
+                                    city = COALESCE(?, city)
+                                    WHERE location_id = ?`,[data.road, data.area, data.city, locationId], function(err){
+            
+                                        if(err){
+                                            res.status(400).json({"error": res.message})
+                                            console.log(err)
+                                            return;
+                                        }
+                                        else{
+                                            res.json({
+                                                message: "success",
+                                                data: data,
+                                                changes: this.changes
+                                            })
+                                        }
+                                    })
+                                }
+            
+                            })
+                        }
+                        
+                    }
+                    
+                )
 
+            }
+            else{
+                res.status(404).json({"error": "No Report Found"})
+                return ;
 
+            }
+        }
+    })
 })
 
 app.delete("/api/report/:id", (req, res) =>{
-    db.run(
-        "DELETE FROM pets WHERE id = ?;", req.params.id,
-        function(err, result){
-            if(err){
-                res.status(400).json({"error": res.message})
-                return;
-            }
-            res.json({"message": "deleted", changes: this.changes})
+    let locationID
+ 
+    db.get("SELECT location_id FROM newpets WHERE id = ?;",[req.params.id], function(err, result){
+        if(err){
+            res.status(400).json({"error": res.message})
+            return ;
         }
-    )
+        else{
+            if(result){
+                locationID = result.location_id
+                db.run("DELETE FROM newpets WHERE id = ?;", req.params.id, function(err){
+                    if(err){
+                        res.status(400).json({"error": res.message})
+                    return;
+                    }
+    
+                    else{
+                        db.run("DELETE FROM location WHERE location_id = ?;", locationID, function(err){
+                            if(err){
+                                res.status(400).json({"error": res.message})
+    
+                            }
+                            else{
+                                res.json({"message": "deleted", changes: this.changes})
+    
+                            }
+                        })
+                        
+                    }
+    
+                })
 
+            }
+            else{
+        
+
+                res.status(204).json({"error": "No Report Found"})
+                return ;
+
+            }
+
+            
+
+        }
+    })
 })
+
 
 app.get("/", (req, res) =>{
  
@@ -181,16 +299,31 @@ app.get("/", (req, res) =>{
 
 });
 app.get("/report/:id", (req, res) =>{
- 
-    res.render("reportDetails")
-});
 
+    db.get("SELECT id FROM newpets \
+        WHERE id = ?", req.params.id, function(err, result){
+        if(err){
+            console.log(err.message)
+            return
+        }
+        else if(result) {
+            res.render("reportDetails")
+          
+            }
+        else{
+            res.render("error404")
+
+        }
+
+        })
+ 
+});
 
 app.get("/report", (req, res) =>{
  
     res.render("report")
-
 });
+
 app.get("/reports", (req, res) =>{
  
     res.render("reports")
@@ -201,6 +334,12 @@ app.get("/quiz", (req, res) =>{
  
     res.render("quiz")
 });
+
+app.get("*", (req, res) =>{
+ 
+    res.render("error404")
+});
+
 
 
 

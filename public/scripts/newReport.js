@@ -5,7 +5,10 @@ const reportForm = document.querySelector(".reportForm");
 const petName = document.getElementById("name");
 const animal = document.getElementById("animal");
 const description = document.getElementById("description");
-const petLocation = document.getElementById("location");
+const road = document.getElementById("road");
+const area = document.getElementById("area");
+const city = document.getElementById("city");
+
 
 
 let output = '';
@@ -19,7 +22,9 @@ reportForm.addEventListener('submit', (e)=>{
             name: petName.value,
             animal: animal.value,
             description: description.value,
-            location: petLocation.value
+            road: road.value,
+            area: area.value,
+            city: city.value
         }
         let dataJson = JSON.stringify(data)
     

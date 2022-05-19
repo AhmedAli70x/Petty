@@ -8,7 +8,7 @@
     --nav-bg:         #0c8195;
     --sec-color: #212529;
     --third-color: #f09000;
-    --report-color: rgb(179, 174, 174);
+    --report-color: rgb(230, 230, 230);
   }
   
   body {
@@ -66,7 +66,8 @@
     padding: 13px 10px 13px 10px;
     text-decoration: none;
     color: var(--white-color);
-    margin-left: 20px;
+    margin-right: 50px;
+    font-size: 1.2rem;
     
   }
   
@@ -93,13 +94,13 @@
     height:100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap; 
   }
 
   .report{
-      width: 150px;
-      height: 150px;
+      width: 195px;
+      height: 160px;
       margin: 3%;
       cursor: pointer;
       background-color: var(--report-color);
@@ -107,19 +108,27 @@
       padding: 10px;
       
   }
+   .pet-name  {
+    font-size: 1.2rem;
+    font-weight: bold;
+    
+  }
+  .pet-type{
+    font-weight: bold;
+  }
 
-.search-button{
+#search-button{
   height: 40px;
   width: 40px;
 }
-.pet-image img , #search-btn img{
+ #search-btn img{
   height: 100%;
   width: 100%;
+  align-self: center;
 
 }
 
   .reportDetails{
-  
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -141,7 +150,8 @@
         display: flex;
         justify-content: center;   
         padding-left: 9%;
-        padding-right: 9%;   
+        padding-right: 9%; 
+        background-color: var(--third-color);  
     }
     
     .search-form{
@@ -621,7 +631,6 @@ footer > #contact > div {
     .report{
       width: 100px;
      height: 150px;
-     /* margin-bottom: 20px; */
      cursor: pointer;
      background-color: var(--report-color);
      border-radius: 3px;

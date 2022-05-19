@@ -34,12 +34,16 @@ function validatasearch() {
     const nameValue = petName.value.trim();
     const animalValue = animal.value.trim();
     const descriptionValue = description.value.trim();
-    const locationValue = petLocation.value.trim();
+    const roadValue = road.value.trim();
+    const areaValue = area.value.trim();
+    const cityValue = city.value.trim();
 
     nameCheck = false;
     animalCheck = false;
     descriptionCheck = false;
-    locationCheck = false;
+    roadCheck = false;
+    areaCheck = false;
+    cityCheck = false;
 
     if(nameValue === ''){
         setError(petName, 'Name is required')
@@ -64,15 +68,33 @@ function validatasearch() {
         descriptionCheck = true
         
     }
-    if(locationValue .length < 5){
-        setError(petLocation, 'Min characters is 5')
-        locationCheck =  false;
+    if(roadValue.length < 5){
+        setError(road, 'Min characters is 5')
+        roadCheck =  false;
     } else{
-        setSuccess(petLocation)
-        locationCheck = true
+        setSuccess(road)
+        roadCheck = true
     }
 
-    if (nameCheck === true && animalCheck === true && descriptionCheck === true && locationCheck === true){
+    if(areaValue.length == ''){
+        setError(area, 'Area is required')
+        areaCheck =  false;
+    } else{
+        setSuccess(area)
+        areaCheck = true
+    }
+
+    if(cityValue.length < 5){
+        setError(city, 'Min characters is 5')
+        cityCheck =  false;
+    } else{
+        setSuccess(city)
+        cityCheck = true
+    }
+
+
+    if (nameCheck === true && animalCheck === true && descriptionCheck === true && 
+        roadCheck === true  && areaCheck === true  && cityCheck === true){
         console.log("true")
         return true
     }else{

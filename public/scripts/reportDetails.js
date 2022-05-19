@@ -10,7 +10,9 @@ const updateForm = document.querySelector(".updateForm");
 const petName = document.getElementById("name");
 const animal = document.getElementById("animal");
 const description = document.getElementById("description");
-const petLocation = document.getElementById("location");
+const road = document.getElementById("road");
+const area = document.getElementById("area");
+const city = document.getElementById("city");
 
 
 
@@ -22,7 +24,9 @@ fetch(updateUrl)
         document.getElementById("name").value = report.name;
         document.getElementById("animal").value = report.animal;
         document.getElementById("description").value = report.description;
-        document.getElementById("location").value = report.location;
+        document.getElementById("road").value = report.road;
+        document.getElementById("area").value = report.area;
+        document.getElementById("city").value = report.city;
    
 })
 
@@ -31,12 +35,15 @@ updateForm.addEventListener('submit', (e)=>{
   
     e.preventDefault();
     let checkForm  = validataInputs();
+    console.log(checkForm)
     if(checkForm){
       var data = {
           name: petName.value,
           animal: animal.value,
           description: description.value,
-          location: petLocation.value
+          road: road.value,
+          area: area.value,
+          city: city.value
       }
       let dataJson = JSON.stringify(data)
       console.log('Form submitted')
