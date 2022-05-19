@@ -1,0 +1,40 @@
+
+.quiz{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 800px;
+    height: 600px;
+}
+  
+img{
+    display: block;
+    width: 200px;
+    height: 200px;
+}
+
+
+@media (max-width:900px) {
+
+    .grid {
+        display: flex;
+        flex-wrap: wrap;
+        width: 400px;
+        height: 300px;
+    }
+      
+    img{
+        display: block;
+        width: 100px;
+        height: 100px;
+    }
+    
+
+}

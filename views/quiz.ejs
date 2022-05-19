@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petty</title>
     <link rel="stylesheet" href="style/style.css" >
+    <link rel="stylesheet" href="style/quiz-style.css"></link>
+
 </head>
 
 <body>
@@ -13,54 +15,30 @@
     <div class="container">
        
         <%- include('include/nav' ); %>
-      <form   class="reportForm">
-          <div class="row">
-            <div class="col-25">
-              <label for="name">Name</label>
-            </div>
-            <div class="col-75">
-              <input type="text" id="name" name="name" placeholder="Pet name..">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-25">
-              <label for="animal">Animal</label>
-            </div>
-            <div class="col-75">
-              <input type="text" id="animal" name="animal" placeholder="Pet type.." >
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-25">
-              <label for="description">Description</label>
-            </div>
-            <div class="col-75">
-              <textarea id="description" name="description" placeholder="Pet description.." style="height:100px" ></textarea>
-            </div>
-          </div>
-          <div class="row">
-              <div class="col-25">
-                <label for="location">Location</label>
-              </div>
-              <div class="col-75">
-                <input type="text" id="location" name="location" placeholder="Pet location..">
-              </div>
-          </div>
-
-          <div class="row">
-            <!-- <button type="submit">Add Report</button> -->
-            <input type="submit" class="submitbtn" value="Submit">
-          </div>
-          <div id="success"></div>
-        </form>
-
-       
+        
+        <section >
             
+            <div class="quiz">
+                <h3>Welcome to the Memory Game  </h3><h4>How to behave towards dogs</h4>
+                
+          <div class="grid">
+          </div>
+          <div class="msg"></div>
+
+        </div>
+            
+            
+            
+        </section>
+
+  
        <%- include('include/footer'); %>
        
     </div>
 
+
     <script src="scripts/quiz.js"></script>
+
 
 </body>
 </html>

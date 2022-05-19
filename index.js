@@ -197,6 +197,12 @@ app.get("/reports", (req, res) =>{
 });
 
 
+app.get("/quiz", (req, res) =>{
+ 
+    res.render("quiz")
+});
+
+
 
 
 
