@@ -84,7 +84,7 @@ function validatasearch() {
         areaCheck = true
     }
 
-    if(cityValue.length < 5){
+    if(cityValue.length < 3){
         setError(city, 'Min characters is 5')
         cityCheck =  false;
     } else{
