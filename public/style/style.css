@@ -79,12 +79,13 @@
     display: none;
   }
 
-  .home-section{
+  .home-section, .error-section{
     display: flex;
     height: 75vh;
     background-color: var(--sec-color);
     padding-left: 9%;
     padding-right: 9%;
+    
     
   }
   .reports-section{
@@ -105,6 +106,7 @@
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap; 
+    padding-bottom: 50px;
   }
 
   .report{
@@ -117,14 +119,12 @@
       padding: 10px;
       
   }
-   .pet-name  {
+  .pet-type  {
     font-size: 1.2rem;
     font-weight: bold;
     
   }
-  .pet-type{
-    font-weight: bold;
-  }
+
 
 #search-button{
   height: 40px;
@@ -241,7 +241,6 @@
     padding: 0;
 
   }
-  
 
   .col-2 img{
     position: relative;
@@ -302,12 +301,12 @@ a.menu:hover {
 }
 
 footer{
-  /* bottom: 0; */
+
   background-color: var(--primary-color);
   color: var(--white-color);
   height: 15vh;
   left: 0;
-  /* position: absolute;  */
+
   font-size: small;
   width:100%;
   padding-left: 8%;
@@ -411,10 +410,22 @@ footer > #contact > div {
     display: table;
     clear: both;
   }
-  .edit, .delete {
+
+  .report-edit{
     display: flex;
-    justify-content: center;
-    margin-top: 10%;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .edit, .delete {
+    background-color: var(--third-color);
+    padding: 5%;
+    border-radius: 45px;
+    color: var(--sec-color);
+    font-weight: bold;
+    font-size: 0.7rem;
+    border-color: var(--sec-color);
+    /* width: 40%; */
+    text-align: center;
 
   }
   .btn {
@@ -599,7 +610,22 @@ footer > #contact > div {
       margin-top: 12px;
     }
     
-  
+    label {
+      padding: 0;
+      display: inline-block;
+    }
+    
+  .submitbtn, .deleteBtn{
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 60px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 0 20px 0;
+    font-weight: bold;
+
+  }
     .sumbit {
       background-color: var(--primary-color);
       color: white;
@@ -611,12 +637,11 @@ footer > #contact > div {
     }
   
   footer{
-    /* bottom: 0; */
+
     background-color: var(--primary-color);
     color: var(--white-color);
     height: auto;
     left: 0;
-    /* position: absolute;  */
     font-size: small;
     width:100%;
     padding-left: 8%;

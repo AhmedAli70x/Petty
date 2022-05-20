@@ -10,16 +10,15 @@
 .grid {
     display: flex;
     flex-wrap: wrap;
-    width: 800px;
-    height: 600px;
+    width: 600px;
+    height: 450px;
 }
   
 img{
     display: block;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
-
 
 @media (max-width:900px) {
 

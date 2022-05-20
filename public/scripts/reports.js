@@ -14,11 +14,14 @@ function update_reports(){
             output += `
             <div class="report">
                 <div class="reportDetails">
-                    <a href="/report/${report.id}"  class="pet-name"> ${report.name}</a>
                     <a href="/report/${report.id}" class="pet-type"> ${report.animal}</a>
                     <a href="/report/${report.id}" class="pet-description" >${report.description}</a>
                     <a href="/report/${report.id}" class="per-road" >${report.road}</a>
-                    <a href="/report/${report.id}" class="pet-city" >${report.city}</a>
+             
+                </div>
+                <div class="report-edit">
+                     <a href="/report/${report.id}" class="edit" >About</a>
+                    <button id ="${report.id}" onclick="delFunction(${report.id});" class="delete"> Delete</button>
                 </div>
     
             </div>
@@ -79,3 +82,27 @@ reportForm.addEventListener('submit', (e)=>{
     }
    
 })
+
+
+
+
+function delFunction(id){
+
+    const deleteURl = `/api/report/${id}`;
+    // console.log(deleteURl)
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          console.log(xhttp.response)
+          document.getElementById('success').textContent = "Report Deleted sucessfully."
+
+      }
+    };
+    xhttp.open("DELETE", deleteURl, false);
+    xhttp.send();
+    
+      
+    update_reports()
+}
+

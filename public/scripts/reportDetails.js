@@ -72,7 +72,7 @@ const deletBtn = document.querySelector(".deleteBtn");
 
 deletBtn.addEventListener('click', (e)=>{
   console.log(updateUrl)
-    e.preventDefault();
+ 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {

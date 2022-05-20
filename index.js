@@ -64,32 +64,20 @@ app.get("/api/reports", (req, res) => {
 
 app.get("/api/report/:id", (req, res) =>{
     //check if there report is exist
-    db.get("SELECT id FROM newpets \
-    WHERE id = ?", req.params.id, function(err, result){
-        if(err){
-            console.log("error here")
-        }
-        else if(result) {
-            var sql = "SELECT id, name, animal, description, road, area, city FROM newpets as p \
-            INNER JOIN location as l ON l.location_id = p.location_id \
-               WHERE id = ?;"   
-           db.all(sql, req.params.id, (err, row) => {
-             if (err) {
-                 res.status(400).json({"error":err.message});
-                 return;
-             }
-                   res.json({
-                       "success": true,
-                       "data":row
-                   })
-               })
-            }
-        else{
-            res.status(204).json({"error": "No Report Found"});
-
-        }
-
+    var sql = "SELECT id, name, animal, description, road, area, city FROM newpets as p \
+    INNER JOIN location as l ON l.location_id = p.location_id \
+        WHERE id = ?;"   
+    db.all(sql, req.params.id, (err, row) => {
+        if (err) {
+            res.status(400).json({"error":err.message});
+     
+        }   
+                res.json({
+                    "success": true,
+                    "data":row
+                })      
         })
+    
 });
 
 app.get("/api/search/:name", (req, res) =>{
@@ -121,12 +109,10 @@ app.post("/api/report/", (req,res) =>{
     }
     //Insert record into location table first according to sqlite_sequence table 
     var  insertLocation = "INSERT INTO location (road, area, city) VALUES (?, ?, ?);"
-    db.run(insertLocation,[data.road, data.area, data.city], function(err) {
-        
+    db.run(insertLocation,[data.road, data.area, data.city], function(err) { 
         if(err){
             res.status(400).json({"error": err.message})
         }
-
         else{
             db.get("SELECT location_id FROM location \
             ORDER BY location_id DESC \
@@ -138,8 +124,10 @@ app.post("/api/report/", (req,res) =>{
                     // console.log(result)
                     let lastLocationId = result.location_id
                     // console.log(lastLocationId)
-                    var insertReport = 'INSERT INTO newpets (name, animal, description, location_id) VALUES (?,?,?,?);'
-                    db.run(insertReport, [data.name, data.animal, data.description, lastLocationId], function(err,result){
+                    var insertReport = 'INSERT INTO newpets (name, animal, description,\
+                         location_id) VALUES (?,?,?,?);'
+                    db.run(insertReport, [data.name, data.animal, data.description,
+                         lastLocationId], function(err,result){
                         if(err){
                             res.status(400).json({"error": err.message})
                         }
@@ -171,7 +159,6 @@ app.put("/api/report/:id", (req, res) =>{
         area: req.body.area,
         city: req.body.city
     }
-
     db.get("SELECT id FROM newpets WHERE id = ?;",[req.params.id], function(err, result){
         if(err){
             res.status(400).json({"error": res.message})
