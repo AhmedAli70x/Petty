@@ -7,16 +7,11 @@ var searchNanme = document.getElementById("search-name")
 
 
 function searchFunction(){
-
     searchNanme = document.getElementById("search-name")
-
     let output = '';
-
     searchVal = validatasearch()
-    
     nameValue = searchNanme.value
     const searchUrl = `api/search/${nameValue}`;
-    // console.log(searchUrl)
 
     searchVal = validatasearch()
  

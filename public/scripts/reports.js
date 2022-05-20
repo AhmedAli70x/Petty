@@ -1,7 +1,5 @@
 
 function update_reports(){
-
-
     const reportsUrl = 'api/reports';
     const reportList = document.querySelector(".reports");
     let output = '';
@@ -29,12 +27,10 @@ function update_reports(){
         });
         reportList.innerHTML = output;
     })
-    
-
 }
 update_reports()
-const reportUrl = '/api/report';
 
+const reportUrl = '/api/report';
 const reportForm = document.querySelector(".reportForm");
 const petName = document.getElementById("name");
 const animal = document.getElementById("animal");
@@ -42,8 +38,6 @@ const description = document.getElementById("description");
 const road = document.getElementById("road");
 const area = document.getElementById("area");
 const city = document.getElementById("city");
-
-
 reportForm.addEventListener('submit', (e)=>{
 
     e.preventDefault();
@@ -87,7 +81,6 @@ reportForm.addEventListener('submit', (e)=>{
 
 
 function delFunction(id){
-
     const deleteURl = `/api/report/${id}`;
     // console.log(deleteURl)
 

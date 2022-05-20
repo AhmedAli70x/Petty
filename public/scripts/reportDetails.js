@@ -14,9 +14,6 @@ const road = document.getElementById("road");
 const area = document.getElementById("area");
 const city = document.getElementById("city");
 
-
-
-
 fetch(updateUrl)
   .then(response => response.json())
   .then(data => {  
@@ -29,8 +26,6 @@ fetch(updateUrl)
         document.getElementById("city").value = report.city;
    
 })
-
-
 updateForm.addEventListener('submit', (e)=>{
   
     e.preventDefault();

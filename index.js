@@ -31,18 +31,6 @@ app.listen(HTTP_PORT, () => {
 });
 
 
-function chechReportExist(id){
-    db.get("SELECT id FROM newpets \
-    WHERE id = ?", id, function(err, result){
-        if(err){
-            console.log("error here")
-        }
-        else{
-            return result
-        }
-
-})
-}
 
 app.get("/api/reports", (req, res) => {
     var sql = "SELECT id, name, animal, description, road, area, city FROM newpets as p \

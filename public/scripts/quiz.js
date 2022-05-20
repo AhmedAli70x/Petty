@@ -98,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cardsChosen = []
       cardsChosenId = []
       console.log(cardsWon.length)
+      //Check if the cardWon == 6, indicated the game is completed
       if  (cardsWon.length === cardArray.length/2) {
         document.querySelector(".msg").innerHTML =  "<h4>Congratulations! You found them all!</h4>"
       }
